@@ -1,0 +1,18 @@
+#I use generaly this in my .gdbinit file: 
+#pass .out file to gdb as parameter ;)
+# p.l.
+set remotebaud 115200           # should match stub
+set remotedevice /dev/ttyS0     # probably not used at all
+set debug remote 1              # output remote commands to console
+				# good idea to keep this on at least for 'target remote'
+set debug serial 0              # output raw characters from remote on console
+set remotelogfile ./gdb.log     # log all remote commands in this file
+set machine h8300s              # probably not necessary   
+set remoteaddresssize 32        # !! there is a bug in gdb, this var is originaly 16!
+set remotecache 1               # I use this for testing, speeds things up a lot.
+				# but problems with 'volatile' registrers could occur
+
+target remote /dev/ttyS0        # open connection to target
+set $sp=0x00200e00              # !set sp before run - debuging stub in HDI will fail otherwise 
+load                            # load program
+set debug remote 0              # stop messages

@@ -1,0 +1,12 @@
+=========================================================================
+StronARM to GNU DEBUGGER Adaption (generic parts)
+=========================================================================
+This directory contains files for a generic gdb adaption for strongarm
+prcessors. The remote.c is the hostside communication stub for serial 
+and udp ethernet connections. The udp part is new.
+
+The targetside stub handles a packet based io. The serial packet handler
+is not really tested (sorry). The udp communication is ok and tested.
+The udp stuff may be taken from our bootstrap loader which handles
+bootp/tftp. There is an older version at the boot directory.
+=========================================================================

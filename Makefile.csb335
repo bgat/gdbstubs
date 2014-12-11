@@ -1,0 +1,27 @@
+CROSS_COMPILE=arm-elf-
+
+CSB335_STUB = arm7tdmi.c arm7tdmi-asm.S csb335.c gdb.c
+CSB335_CFLAGS = -Wall -g -O0
+
+
+
+.PHONY: csb335-stub
+
+csb335-stub: csb335-stub.elf 
+
+csb335-stub.bin: csb335-stub.elf
+	$(CROSS_COMPILE)objcopy -O binary $< $@
+
+csb335-stub.elf: $(CSB335_STUB)
+	$(CROSS_COMPILE)gcc \
+		$(CSB335_CFLAGS) -o $@ \
+		-nostartfiles -nodefaultlibs \
+		-Wl,--script="csb335.x" \
+		$(CSB335_STUB)
+	$(CROSS_COMPILE)objdump --syms $@ | grep " _start"
+
+
+
+
+clean:
+	rm -f *.mot *.elf *.bin *.uue

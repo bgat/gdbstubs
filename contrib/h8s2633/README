@@ -1,0 +1,10 @@
+This is stub for Hitach h8s 2633 procesor.
+I am currently working on it, but it seems to be quite stable.
+I load this stub into EVB using HDI debuger.
+It works with gdb-5.0 under linux
+I am now testing it, soon I'll finish version ready for ROM.
+
+This stub uses application stack now (maybe more than 1k)!
+
+I would welcome feedback on this stub.
+
